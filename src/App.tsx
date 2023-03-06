@@ -5,7 +5,7 @@ import {useState} from "react";
 function App() {
     const [City, setCity] = useState('');
     const fetchWeather = async () => {
-        const data = await getFormattedWeatherData( {q: "Kyiv"});
+        const data = await getFormattedWeatherData( {q: "Kyiv", units: "metric"});
         console.log(data)
     }
     fetchWeather()
