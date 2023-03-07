@@ -1,12 +1,9 @@
+import {PARAMS} from "../enum";
 
 const API_KEY = "eb86123da413b4ed9415b668c127ca1b";
 const BASE_URL = "https://pro.openweathermap.org/data/2.5";
 
-enum PARAMS {
-    weather = "weather",
-    hourlyForecast = "forecast/hourly",
-    monthForecast = "forecast/climate"
-}
+
 
 interface searchParam {
     q?: string,
@@ -58,7 +55,7 @@ const formatCurrentWeather = (data: any) => {
 const formatForecastWeather = (data: any) => {
     let {city, list} = data;
     let {timezone} = city;
-    list = list.slice(0, 6).map((d: any) => {
+    list = list.slice(1, 8).map((d: any) => {
         return {
             title: new Date(Number(d.dt + "000")),
             temp: d.temp.day,
@@ -80,7 +77,7 @@ const getFormattedWeatherData = async (searchParams: searchParam) => {
         cnt: "14",
         units: searchParams.units
     }).then(formatForecastWeather)
-    return formattedForecastWeather
+    return {...formattedCurrentWeather, formattedForecastWeather}
 }
 
 

@@ -1,16 +1,11 @@
 import './App.css'
-import getFormattedWeatherData from "./services/weatherSrvice";
-import {useState} from "react";
+import WeatherForecast from "./components/WeatherForecast";
 
 function App() {
-    const [City, setCity] = useState('');
-    const fetchWeather = async () => {
-        const data = await getFormattedWeatherData( {q: "Kyiv", units: "metric"});
-        console.log(data)
-    }
-    fetchWeather()
   return (
-    <div className="App">
+    <div className={"bg-gray-800"}>
+
+        <WeatherForecast/>
 
     </div>
   )
