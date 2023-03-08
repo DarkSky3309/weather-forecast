@@ -5,7 +5,5 @@ import './index.css'
 import 'remixicon/fonts/remixicon.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>,
 )

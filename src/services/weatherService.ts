@@ -68,7 +68,6 @@ const formatForecastWeather = (data: any) => {
 }
 const getFormattedWeatherData = async (searchParams: searchParam) => {
     const formattedCurrentWeather = await getWeatherData(PARAMS.weather, searchParams).then(formatCurrentWeather)
-
     const {lat, lon} = formattedCurrentWeather;
     const formattedForecastWeather = await getWeatherData(PARAMS.monthForecast, {
         lat,

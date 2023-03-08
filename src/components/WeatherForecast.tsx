@@ -1,25 +1,36 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Navigation from "./Navigation";
 import {UNITS} from "../enum";
-import getFormattedWeatherData from "../services/weatherSrvice";
+import getFormattedWeatherData from "../services/weatherService";
+import Forecast from "./Forecast";
 
-interface W {
 
-}
 
 const WeatherForecast = () => {
-    const [city, setCity] = useState('Kyiv');
+    const [city, setCity] = useState('Dnepr');
     const [units, setUnits] = useState(UNITS.metric);
+    const [data, setData]:any = useState();
+    const [isDataReceived, setIsDataReceived] = useState(false);
     const fetchWeather = async () => {
-        const data = await getFormattedWeatherData( {q: city, units: units});
-        return data
+        let data:any
+        try {
+            data = await getFormattedWeatherData( {q: city, units: units});
+        } catch (e) {console.error(e)}
+            finally {
+            setIsDataReceived(true)
+        }
+        console.log(data)
+        setData(data)
     }
-    const data:any = fetchWeather();
 
+    useEffect(() => {
+        fetchWeather()
+    }, [city])
 
     return (
         <div className={`bg-cold max-w-5xl h-screen bg-deep-cold bg-cover bg-no-repeat bg-center mx-auto`}>
-            <Navigation/>
+            <Navigation setCity={setCity}/>
+            <Forecast data={data} isDataReceived={isDataReceived}/>
         </div>
     );
 };

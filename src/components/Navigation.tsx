@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
+import {CITY} from "../enum";
 
-const Navigation = () => {
+interface navigationType{
+    setCity: (elem:string) => void
+}
+
+const Navigation:FC<navigationType> = ({setCity}) => {
     return (
         <header className={"w-11/12 mx-auto flex justify-between text-white py-6 text-2xl"}>
             <div className={"flex justify-between max-w-lg w-full"}>
-                <span className={"cursor-pointer"}>Kyiv</span>
-                <span className={"cursor-pointer"}>Kharkiv</span>
-                <span className={"cursor-pointer"}>Odesa</span>
-                <span className={"cursor-pointer"}>Lviv</span>
-                <span className={"cursor-pointer"}>Dnepr</span>
+                <span onClick={()=> setCity(CITY.kyiv)} className={"cursor-pointer"}>Kyiv</span>
+                <span onClick={()=> setCity(CITY.kharkiv)} className={"cursor-pointer"}>Kharkiv</span>
+                <span onClick={()=> setCity(CITY.odesa)} className={"cursor-pointer"}>Odesa</span>
+                <span onClick={()=> setCity(CITY.lviv)} className={"cursor-pointer"}>Lviv</span>
+                <span onClick={()=> setCity(CITY.dnepro)} className={"cursor-pointer"}>Dnepr</span>
             </div>
             <div className={"flex gap-5"}>
                 <div className={"relative"}>
