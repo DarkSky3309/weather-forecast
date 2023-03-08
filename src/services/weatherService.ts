@@ -1,4 +1,5 @@
 import {PARAMS} from "../enum";
+import viteReact from "@vitejs/plugin-react";
 
 const API_KEY = "eb86123da413b4ed9415b668c127ca1b";
 const BASE_URL = "https://pro.openweathermap.org/data/2.5";
@@ -79,7 +80,11 @@ const getFormattedWeatherData = async (searchParams: searchParam) => {
     return {...formattedCurrentWeather, formattedForecastWeather}
 }
 
+const iconUrlFromCode = (code:string) => `http://openweathermap.org/img/wn/${code}@2x.png`
+
 
 
 export default getFormattedWeatherData;
+
+export {iconUrlFromCode}
 

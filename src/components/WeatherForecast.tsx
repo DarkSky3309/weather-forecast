@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Navigation from "./Navigation";
 import {UNITS} from "../enum";
 import getFormattedWeatherData from "../services/weatherService";
-import Forecast from "./Forecast";
+import Forecast from "./Forecast/Forecast";
 import Loader from "./Loader";
 
 
