@@ -3,6 +3,7 @@ import Navigation from "./Navigation";
 import {UNITS} from "../enum";
 import getFormattedWeatherData from "../services/weatherService";
 import Forecast from "./Forecast";
+import Loader from "./Loader";
 
 
 
@@ -30,7 +31,10 @@ const WeatherForecast = () => {
     return (
         <div className={`bg-cold max-w-5xl h-screen bg-deep-cold bg-cover bg-no-repeat bg-center mx-auto`}>
             <Navigation setCity={setCity}/>
-            <Forecast data={data} isDataReceived={isDataReceived}/>
+            {isDataReceived ?
+                <Forecast data={data} isDataReceived={isDataReceived}/> :
+                <Loader/>
+            }
         </div>
     );
 };

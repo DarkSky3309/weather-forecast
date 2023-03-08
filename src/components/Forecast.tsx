@@ -1,25 +1,31 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
+import {DAY} from "../enum";
+
 
 interface forecastType{
     data:any,
     isDataReceived:boolean
 }
 
-const Forecast:FC <forecastType> = ({data, isDataReceived}) => {
 
+
+const Forecast:FC <forecastType> = ({data, isDataReceived}) => {
+    let {month ,day, hour, minute} = convertTime(data.dt)
+    let currentDate = new Date(Date.now())
+
+    //create function for iterate time
 
     function convertTime (dt:any) {
         const time = new Date(Number(dt + "000"))
-        return time.getFullYear()
+        return {day: time.getDay(), hour: time.getHours(), minute: time.getMinutes(), month: time.getMonth()}
     }
-
     return (
         <div className={"flex align-middle justify-center text-white"}>
             <div className={"text-5xl uppercase font-semibold"}>
-                <span>{isDataReceived && data.name + ", " + data.country}</span>
+                <span>{data.name + ", " + data.country}</span>
             </div>
             <div>
-                {/*<span>{convertTime(data.dt)}</span>*/}
+                <span>{}</span>
             </div>
 
         </div>

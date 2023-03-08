@@ -16,3 +16,5 @@ export enum CITY{
     odesa = "Odesa",
     dnepro = "dnepr",
 }
+
+export const DAY = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
