@@ -6,10 +6,6 @@ interface currentWeatherProps {
     details: string,
     icon: string,
     temp: number,
-    sunset: number,
-    sunrise: number,
-    temp_max: number,
-    temp_min: number,
     humidity: number,
     feels_like: number,
     speed: number,
@@ -21,12 +17,8 @@ const CurrentWeather: FC<currentWeatherProps> = ({
                                                      details,
                                                      feels_like,
                                                      icon,
-                                                     sunset,
-                                                     sunrise,
                                                      humidity,
                                                      temp,
-                                                     temp_min,
-                                                     temp_max,
                                                      speed
                                                  }) => {
     return (

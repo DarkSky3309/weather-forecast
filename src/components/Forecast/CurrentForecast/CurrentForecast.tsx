@@ -3,6 +3,7 @@ import {DateTime} from "luxon";
 import LocationAndTime from "./LocationAndTime";
 import CurrentWeather from "./CurrentWeather";
 import {UNITS} from "../../../enum";
+import DayInfo from "./DayInfo";
 
 interface currentForecastProps {
     timezone: number,
@@ -66,9 +67,10 @@ const CurrentForecast: FC<currentForecastProps> = ({
     return (
         <div className={"flex flex-col gap-3 items-center w-full"}>
             <LocationAndTime dt={dt} name={name} country={country}/>
-            <CurrentWeather units={units} details={details} icon={icon} temp={temp} sunset={sunset} sunrise={sunrise}
-                            temp_max={temp_max} temp_min={temp_min} humidity={humidity} feels_like={feels_like}
+            <CurrentWeather units={units} details={details} icon={icon} temp={temp}
+                            humidity={humidity} feels_like={feels_like}
                             speed={speed}/>
+            <DayInfo timezone={timezone} sunrise={sunrise} sunset={sunset} tem_max={temp_max} temp_min={temp_min}/>
         </div>
     );
 };
