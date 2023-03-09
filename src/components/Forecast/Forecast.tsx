@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import CurrentForecast from "./CurrentForecast";
+import CurrentForecast from "./CurrentForecast/CurrentForecast";
 
 
 interface forecastType {
@@ -26,8 +26,8 @@ const Forecast: FC<forecastType> = ({data}) => {
     }
 
     return (
-        <div className={"flex items-center justify-center text-white colum flex-col"}>
-            <CurrentForecast timezone={data.timezone} icon={data.icon} country={data.country} name={data.name}
+        <div className={"flex items-center justify-center text-white colum flex-col w-10/12 mx-auto"}>
+            <CurrentForecast temp={data.temp} timezone={data.timezone} icon={data.icon} country={data.country} name={data.name}
                              details={data.details} feels_like={data.feels_like} humidity={data.humidity}
                              speed={data.speed} sunrise={data.sunrise} sunset={data.sunset} temp_max={data.temp_max}
                              temp_min={data.temp_min} convertTime={convertTime}/>

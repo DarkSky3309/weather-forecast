@@ -1,0 +1,46 @@
+import React, {FC} from 'react';
+import {iconUrlFromCode} from "./../../../services/weatherService"
+
+interface currentWeatherProps {
+    details: string,
+    icon: string,
+    temp: number,
+    sunset: number,
+    sunrise: number,
+    temp_max: number,
+    temp_min: number,
+    humidity: number,
+    feels_like: number,
+    speed: number
+}
+
+const CurrentWeather: FC<currentWeatherProps> = ({
+                                                     details,
+                                                     feels_like,
+                                                     icon,
+                                                     sunset,
+                                                     sunrise,
+                                                     humidity,
+                                                     temp,
+                                                     temp_min,
+                                                     temp_max,
+                                                     speed
+                                                 }) => {
+    return (
+
+        <div className={"w-full text-center text-2xl"}>
+            <div className="">{details}</div>
+            <div className={"flex justify-around flex-row w-full items-center"}>
+                <img className={"w-1/5 text-right"} src={iconUrlFromCode(icon)} alt=""/>
+                <p className={"font-semibold text-4xl"}>{temp.toFixed() + "°"}</p>
+                <div className={"text-left flex flex-col gap-2"}>
+                    <p className={"items-center flex gap-1"}><i className="ri-temp-hot-line"></i> Real Feel: {feels_like.toFixed()}°</p>
+                    <p className={"items-center flex gap-1"}><i className="ri-windy-line"></i>Wind: {speed.toFixed()} km/h </p>
+                    <p className={"items-center flex gap-1"}><i className="ri-contrast-drop-2-fill"></i> Humidity: {humidity}%</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default CurrentWeather;
