@@ -1,17 +1,26 @@
-import React, {FC, useState} from 'react';
-import {CITY} from "../enum";
-import {DateTime} from "luxon";
+import React, {Dispatch, FC, SetStateAction, useState} from 'react';
+import Geocode from "react-geocode";
+import {CITY, UNITS} from "../enum";
 
 interface navigationType {
     setCity: (elem: string) => void
+    setUnits: Dispatch<SetStateAction<UNITS>>
 }
 
-const Navigation: FC<navigationType> = ({setCity}) => {
+const Navigation: FC<navigationType> = ({setCity, setUnits}) => {
     const [searchCity, setSearchCity] = useState('');
+    const [currentLocation, setCurrentLocation]:[{latitude: number, longitude: number} | undefined, Dispatch<SetStateAction<{latitude: number, longitude: number}| undefined>> ] = useState();
 
     const lookForCity = () => {
         setCity(searchCity);
         setSearchCity("")
+    }
+
+    const getLocation = async () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const {latitude, longitude} = position.coords;
+            setCurrentLocation({latitude, longitude})
+        })
     }
 
     return (
@@ -35,9 +44,9 @@ const Navigation: FC<navigationType> = ({setCity}) => {
                 </div>
                 <span><i className="ri-map-pin-line"></i></span>
                 <div>
-                    <span>°C</span>
+                    <span className={"cursor-pointer"} onClick={() => setUnits(UNITS.metric)}>°C</span>
                     <span> | </span>
-                    <span>°F</span>
+                    <span className={"cursor-pointer"} onClick={() => setUnits(UNITS.imperial)}>°F</span>
                 </div>
             </div>
         </header>

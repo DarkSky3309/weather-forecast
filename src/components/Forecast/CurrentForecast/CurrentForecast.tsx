@@ -1,7 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import {DateTime} from "luxon";
 import LocationAndTime from "./LocationAndTime";
 import CurrentWeather from "./CurrentWeather";
+import {UNITS} from "../../../enum";
 
 interface currentForecastProps {
     timezone: number,
@@ -17,10 +18,11 @@ interface currentForecastProps {
     temp_min: number,
     sunset: number,
     sunrise: number
-    convertTime: (dt: number) => { day: number, hour: number, minutes: number, month: number, date: number, year: number, seconds: number }
+    units: UNITS,
 }
 
 const CurrentForecast: FC<currentForecastProps> = ({
+                                                       units,
                                                        timezone,
                                                        details,
                                                        feels_like,
@@ -33,19 +35,30 @@ const CurrentForecast: FC<currentForecastProps> = ({
                                                        temp_min,
                                                        name,
                                                        country,
-                                                       convertTime,
                                                        temp
                                                    }) => {
     const [dt, setDt] = useState(DateTime.now().setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toFormat("DDDD hh:mm:ss a"));
-
+    const [intervalState, setIntervalState]:[undefined | number, Dispatch<SetStateAction<number>> | Dispatch<SetStateAction<undefined>>] = useState(undefined);
     const dataToLocalTime = (timezone: number) => {
         setDt(DateTime.now().setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toFormat("DDDD hh:mm:ss a"))
     }
 
-    const refreshTime: Promise<number> = new Promise(() => {
-        setTimeout(() => dataToLocalTime(timezone), 1000)
-    }).then(() => refreshTime)
+    function startInterval(timezone: number) {
+        // @ts-ignore
+        setIntervalState(setInterval(() => {
+            dataToLocalTime(timezone);
+        }, 1000));
 
+    }
+
+    function stopInterval() {
+        clearInterval(intervalState)
+    }
+
+    useEffect(() => {
+        stopInterval()
+        startInterval(timezone)
+    }, [timezone])
 
     useEffect(() => {
         dataToLocalTime(timezone)
@@ -53,7 +66,7 @@ const CurrentForecast: FC<currentForecastProps> = ({
     return (
         <div className={"flex flex-col gap-3 items-center w-full"}>
             <LocationAndTime dt={dt} name={name} country={country}/>
-            <CurrentWeather details={details} icon={icon} temp={temp} sunset={sunset} sunrise={sunrise}
+            <CurrentWeather units={units} details={details} icon={icon} temp={temp} sunset={sunset} sunrise={sunrise}
                             temp_max={temp_max} temp_min={temp_min} humidity={humidity} feels_like={feels_like}
                             speed={speed}/>
         </div>

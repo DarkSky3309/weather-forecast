@@ -26,15 +26,18 @@ const WeatherForecast = () => {
 
     useEffect(() => {
         fetchWeather()
-    }, [city])
+    }, [city, units])
 
     return (
         <div className={`bg-cold max-w-5xl h-screen bg-deep-cold bg-cover bg-no-repeat bg-center mx-auto`}>
-            <Navigation setCity={setCity}/>
-            {isDataReceived ?
-                <Forecast data={data}/> :
-                <Loader/>
-            }
+            <Navigation setCity={setCity} setUnits={setUnits}/>
+            <div className={"mt-5"}>
+                {isDataReceived ?
+                    <Forecast data={data} units={units}/> :
+                    <Loader/>
+                }
+            </div>
+
         </div>
     );
 };
