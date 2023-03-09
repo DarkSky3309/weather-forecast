@@ -33,7 +33,7 @@ const WeatherForecast = () => {
             <Navigation setCity={setCity} setUnits={setUnits}/>
             <div className={"mt-5"}>
                 {isDataReceived ?
-                    <Forecast data={data} units={units}/> :
+                    <Forecast city={city} data={data} units={units}/> :
                     <Loader/>
                 }
             </div>

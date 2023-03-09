@@ -73,6 +73,13 @@ const formatForecastWeather = (data: any) => {
     })
     return list
 }
+
+const getFormattedHourlyWeatherData = async (searchParams: searchParam) => {
+    const formattedHourlyData = await getWeatherData(PARAMS.hourlyForecast, searchParams)
+    const {list} = formattedHourlyData
+    return {list}
+}
+
 const getFormattedWeatherData = async (searchParams: searchParam) => {
     const formattedCurrentWeather = await getWeatherData(PARAMS.weather, searchParams).then(formatCurrentWeather)
     const {lat, lon} = formattedCurrentWeather;
@@ -92,5 +99,5 @@ const iconUrlFromCode = (code:string) => `http://openweathermap.org/img/wn/${cod
 
 export default getFormattedWeatherData;
 
-export {iconUrlFromCode, getCity}
+export {iconUrlFromCode, getCity, getFormattedHourlyWeatherData}
 
