@@ -17,7 +17,7 @@ const Navigation: FC<navigationType> = ({setCity, setUnits}) => {
         setSearchCity("")
     }
 
-    function showError(e) {
+    function showError() {
         alert("Please give permission to your geolocation")
     }
 
@@ -45,7 +45,7 @@ const Navigation: FC<navigationType> = ({setCity, setUnits}) => {
         })
         navigator.permissions.query({name: "geolocation"}).then((result) => {
             if (result.state === "denied") {
-                showError(result.state);
+                showError();
             }
         })
     }
@@ -53,11 +53,11 @@ const Navigation: FC<navigationType> = ({setCity, setUnits}) => {
 return (
     <header className={"w-11/12 mx-auto flex justify-between text-white py-6 text-2xl"}>
         <div className={"flex justify-between max-w-lg w-full"}>
-            <span onClick={() => setCity(CITY.kyiv)} className={"cursor-pointer"}>Kyiv</span>
-            <span onClick={() => setCity(CITY.kharkiv)} className={"cursor-pointer"}>Kharkiv</span>
-            <span onClick={() => setCity(CITY.odesa)} className={"cursor-pointer"}>Odesa</span>
-            <span onClick={() => setCity(CITY.lviv)} className={"cursor-pointer"}>Lviv</span>
-            <span onClick={() => setCity(CITY.dnepro)} className={"cursor-pointer"}>Dnepr</span>
+            <span onClick={() => setCity(CITY.kyiv)} className={"cursor-pointer hover:scale-125 duration-200"}>Kyiv</span>
+            <span onClick={() => setCity(CITY.kharkiv)} className={"cursor-pointer hover:scale-125 duration-200"}>Kharkiv</span>
+            <span onClick={() => setCity(CITY.odesa)} className={"cursor-pointer hover:scale-125 duration-200"}>Odesa</span>
+            <span onClick={() => setCity(CITY.lviv)} className={"cursor-pointer hover:scale-125 duration-200"}>Lviv</span>
+            <span onClick={() => setCity(CITY.dnepro)} className={"cursor-pointer hover:scale-125 duration-200  "}>Dnepr</span>
         </div>
         <div className={"flex gap-5"}>
             <div className={"relative"}>
@@ -69,13 +69,13 @@ return (
                         className={"text-black bg-transparent border-none cursor-pointer inline-block absolute top-0 right-0 pr-2 hover:text-deep-cold duration-200"}>
                     <i className="ri-search-line"></i></button>
             </div>
-            <span onClick={() => {
+            <span className={"cursor-pointer hover:scale-125 duration-200"} onClick={() => {
                 getLocation()
             }}><i className="ri-map-pin-line"></i></span>
-            <div>
-                <span className={"cursor-pointer"} onClick={() => setUnits(UNITS.metric)}>°C</span>
+            <div className={"relative"}>
+                <span className={"cursor-pointer hover:scale-125 duration-200"} onClick={() => setUnits(UNITS.metric)}>°C</span>
                 <span> | </span>
-                <span className={"cursor-pointer"} onClick={() => setUnits(UNITS.imperial)}>°F</span>
+                <span className={"cursor-pointer hover:scale-125 duration-200"} onClick={() => setUnits(UNITS.imperial)}>°F</span>
             </div>
         </div>
     </header>
