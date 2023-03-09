@@ -1,18 +1,13 @@
-import React, {FC, useEffect, useState} from 'react';
-import {INFO} from "../../enum";
+import React, {FC} from 'react';
 import CurrentForecast from "./CurrentForecast";
-import {iconUrlFromCode} from "../../services/weatherService";
 
 
 interface forecastType {
     data: any,
-    isDataReceived: boolean
 }
 
 
-const Forecast: FC<forecastType> = ({data, isDataReceived}) => {
-    let {month, day, hour, minutes, date, year} = convertTime(data.dt)
-    let currentDate = new Date(Date.now())
+const Forecast: FC<forecastType> = ({data}) => {
 
     //create function for refresh time
 
@@ -32,7 +27,7 @@ const Forecast: FC<forecastType> = ({data, isDataReceived}) => {
 
     return (
         <div className={"flex items-center justify-center text-white colum flex-col"}>
-            <CurrentForecast icon={data.icon} country={data.country} name={data.name}
+            <CurrentForecast timezone={data.timezone} icon={data.icon} country={data.country} name={data.name}
                              details={data.details} feels_like={data.feels_like} humidity={data.humidity}
                              speed={data.speed} sunrise={data.sunrise} sunset={data.sunset} temp_max={data.temp_max}
                              temp_min={data.temp_min} convertTime={convertTime}/>

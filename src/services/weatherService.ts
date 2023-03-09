@@ -1,5 +1,4 @@
 import {PARAMS} from "../enum";
-import viteReact from "@vitejs/plugin-react";
 
 const API_KEY = "eb86123da413b4ed9415b668c127ca1b";
 const BASE_URL = "https://pro.openweathermap.org/data/2.5";
@@ -29,7 +28,8 @@ const formatCurrentWeather = (data: any) => {
         dt,
         sys: {country, sunrise, sunset},
         weather,
-        wind: {speed}
+        wind: {speed},
+        timezone
     } = data
 
     const {main: details, icon} = weather[0]
@@ -49,7 +49,8 @@ const formatCurrentWeather = (data: any) => {
         sunset,
         details,
         icon,
-        speed
+        speed,
+        timezone
     }
 }
 

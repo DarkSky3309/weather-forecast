@@ -32,7 +32,7 @@ const WeatherForecast = () => {
         <div className={`bg-cold max-w-5xl h-screen bg-deep-cold bg-cover bg-no-repeat bg-center mx-auto`}>
             <Navigation setCity={setCity}/>
             {isDataReceived ?
-                <Forecast data={data} isDataReceived={isDataReceived}/> :
+                <Forecast data={data}/> :
                 <Loader/>
             }
         </div>
