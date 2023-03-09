@@ -2,8 +2,7 @@ import {PARAMS} from "../enum";
 
 const API_KEY = "eb86123da413b4ed9415b668c127ca1b";
 const BASE_URL = "https://pro.openweathermap.org/data/2.5";
-
-
+const GEO_URL = "https://api.openweathermap.org/geo/1.0/reverse?"
 
 interface searchParam {
     q?: string,
@@ -11,6 +10,12 @@ interface searchParam {
     mode?: string,
     cnt?: string,
     lang?: string,
+}
+const getCity = (searchParams: object) => {
+    const url = new URL(GEO_URL)
+    // @ts-ignore
+    url.search = new URLSearchParams({...searchParams, appid: API_KEY})
+    return fetch(url).then((res) => res.json())
 }
 
 const getWeatherData = (infoType: string, searchParams: object) => {
@@ -87,5 +92,5 @@ const iconUrlFromCode = (code:string) => `http://openweathermap.org/img/wn/${cod
 
 export default getFormattedWeatherData;
 
-export {iconUrlFromCode}
+export {iconUrlFromCode, getCity}
 

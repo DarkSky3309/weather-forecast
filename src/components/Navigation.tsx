@@ -1,6 +1,7 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import Geocode from "react-geocode";
 import {CITY, UNITS} from "../enum";
+import {getCity, iconUrlFromCode} from "../services/weatherService";
 
 interface navigationType {
     setCity: (elem: string) => void
@@ -15,8 +16,32 @@ const Navigation: FC<navigationType> = ({setCity, setUnits}) => {
         setCity(searchCity);
         setSearchCity("")
     }
+    function enablePermissions () {
+        navigator.permissions.query({name: "geolocation"}).then((result) => {
+            if (result.state === "granted")
+                console.log("granted")
+            else if (result.state === "prompt")
+                console.log("prompt")
+            console.log("den")
+        })
+    }
+
+    const fetchCity = async () => {
+        let data:any
+        if (currentLocation){
+            try {
+                data = await getCity({lat: currentLocation.latitude, lon: currentLocation.longitude})
+                setCity(data[0].name)
+            } catch (e) {console.error(e)}
+        }
+    }
+    useEffect(() => {
+        fetchCity()
+    }, [currentLocation])
+
 
     const getLocation = async () => {
+        enablePermissions();
         navigator.geolocation.getCurrentPosition((position) => {
             const {latitude, longitude} = position.coords;
             setCurrentLocation({latitude, longitude})
@@ -34,7 +59,7 @@ const Navigation: FC<navigationType> = ({setCity, setUnits}) => {
             </div>
             <div className={"flex gap-5"}>
                 <div className={"relative"}>
-                    <input value={searchCity} onKeyPress={(event) => {
+                    <input value={searchCity} onKeyDown={(event) => {
                         event.key === "Enter" ? lookForCity() : ""
                     }} onChange={(e) => setSearchCity(e.target.value.toString())} type="text" placeholder={"Search..."}
                            className={"text-xl text-black py-1 px-2 rounded-3xl"}/>
@@ -42,7 +67,7 @@ const Navigation: FC<navigationType> = ({setCity, setUnits}) => {
                             className={"text-black bg-transparent border-none cursor-pointer inline-block absolute top-0 right-0 pr-2 hover:text-deep-cold duration-200"}>
                         <i className="ri-search-line"></i></button>
                 </div>
-                <span><i className="ri-map-pin-line"></i></span>
+                <span onClick={ () => { getLocation()}}><i className="ri-map-pin-line"></i></span>
                 <div>
                     <span className={"cursor-pointer"} onClick={() => setUnits(UNITS.metric)}>°C</span>
                     <span> | </span>
