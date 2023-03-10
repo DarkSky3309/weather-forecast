@@ -28,21 +28,21 @@ const HourlyForecast: FC<HourlyForecastProps> = ({timezone, city, units, selecte
     }
     useEffect(() => {
         fetchHourlyWeather()
-    }, [city])
+    }, [city, units])
     const renderHourlyForecast = (selectedDay: string) => {
         if (isDataReceived){
             return data.list.map((data:any, index:number) => {
                 let day = DateTime.fromSeconds(data.dt).setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toLocaleString({weekday: "long"})
                 console.log(day, selectedDay);
                 if (day === selectedDay)
-                    return <HourComponent key={index} icon={data.weather[0].icon} dt={data.dt} temp={data.main.temp} timezone={timezone}/>
+                    return <HourComponent units={units} key={index} icon={data.weather[0].icon} dt={data.dt} temp={data.main.temp} timezone={timezone}/>
                 else return
             })
         }
     }
 
     return (
-        <div className={"w-full overflow-scroll flex"}>
+        <div className={"w-full overflow-scroll flex gap-x-7 items-center mt-8"}>
             {renderHourlyForecast(selectedDay)}
         </div>
     );
