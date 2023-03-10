@@ -20,7 +20,6 @@ const WeatherForecast = () => {
             finally {
             setIsDataReceived(true)
         }
-        console.log(data)
         setData(data)
     }
 
