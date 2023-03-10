@@ -16,12 +16,12 @@ const HourComponent:FC<HourComponentProps> = ({icon, temp, dt, timezone, units})
         return DateTime.fromSeconds(dt).setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toFormat("hh:mm a")
     }
     return (
-        <div className={"flex flex-col items-center w-24 min-w-max"}>
+        <div className={"flex flex-col items-center min-w-max swiper-slide"}>
             <div>
                 {formatHours(dt, timezone)}
             </div>
             <div>
-                <img src={iconUrlFromCode(icon)} alt=""/>
+                <img draggable={false} src={iconUrlFromCode(icon)} alt=""/>
             </div>
             <div>
                 {(temp > 0 ? "+" + temp.toFixed() : temp.toFixed()) + (units === UNITS.metric ? " C°" : " F°")}

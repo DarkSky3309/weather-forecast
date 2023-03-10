@@ -11,7 +11,7 @@ interface DayInfoProps{
 
 const DayInfo:FC<DayInfoProps> = ({sunrise,sunset,tem_max,temp_min, timezone}) => {
     function formatToLocalTime (timezone:number, time:number) {
-        return DateTime.fromSeconds(time).setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toFormat("hh:mm:ss")
+        return DateTime.fromSeconds(time).setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toFormat("hh:mm:ss a")
     }
     return (
         <div className={"flex items-center justify-between w-6/12"}>
