@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loader = () => {
     return (
-        <div className={"h-screen"}>
+        <div className={""} style={{height: 923}}>
             
         </div>
     );

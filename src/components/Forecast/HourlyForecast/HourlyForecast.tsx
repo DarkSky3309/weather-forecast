@@ -3,7 +3,8 @@ import {getFormattedHourlyWeatherData} from "../../../services/weatherService";
 import {DateTime} from "luxon";
 import HourComponent from "./HourComponent";
 import {UNITS} from "../../../enum";
-import {motion} from "framer-motion";
+import {motion, useMotionValue} from "framer-motion";
+import PropTypes from "prop-types";
 
 
 interface HourlyForecastProps {
@@ -32,6 +33,7 @@ const HourlyForecast: FC<HourlyForecastProps> = ({time_now, timezone, city, unit
     useEffect(() => {
         fetchHourlyWeather()
     }, [city, units])
+
     const renderHourlyForecast = (selectedDay: string) => {
         if (isDataReceived) {
             let filterData = data.list.map((data: any, index: number) => {
@@ -57,11 +59,14 @@ const HourlyForecast: FC<HourlyForecastProps> = ({time_now, timezone, city, unit
             return Number(time + 1) * 100 - swiper.current.offsetWidth
         return 2400 - swiper.current.offsetWidth
     }
+    const [key, setKey] = useState(1);
+    useEffect(() => {if (selectedDay === DateTime.now().setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).weekdayLong) setKey(Math.random)}, [selectedDay])
 
     return (
-        <motion.div className={"w-full mt-8 swiper overflow-hidden cursor-pointer"} ref={swiper}>
+        <motion.div key={key} className={"w-full mt-8 swiper overflow-hidden cursor-pointer"} ref={swiper}>
             {isDataReceived && (
-                <motion.div drag={"x"} dragConstraints={{right: 0, left: -calcWidth()}}
+                <motion.div drag={'x'} onDragEnd={(event, info) => {
+                    console.log(info);}} dragConstraints={{right: 0, left: -calcWidth()}}
                             className={"swiper-wrapper flex w-32"}
                             ref={inner}>
                     {renderHourlyForecast(selectedDay)}
