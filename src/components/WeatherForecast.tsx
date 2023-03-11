@@ -28,7 +28,7 @@ const WeatherForecast = () => {
     }, [city, units])
 
     return (
-        <div className={`bg-cold max-w-5xl h-screen bg-deep-cold bg-cover bg-no-repeat bg-center mx-auto`}>
+        <div className={`bg-cold max-w-5xl bg-deep-cold bg-cover bg-no-repeat bg-center mx-auto`}>
             <Navigation setCity={setCity} setUnits={setUnits}/>
             <div className={"mt-5"}>
                 {isDataReceived ?

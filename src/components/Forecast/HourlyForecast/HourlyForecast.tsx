@@ -17,7 +17,6 @@ interface HourlyForecastProps {
 const HourlyForecast: FC<HourlyForecastProps> = ({time_now, timezone, city, units, selectedDay}) => {
     const [data, setData]: any = useState();
     const [isDataReceived, setIsDataReceived] = useState(false);
-    let amount = 0
     const fetchHourlyWeather = async () => {
         setIsDataReceived(false)
         let data: any
@@ -42,7 +41,6 @@ const HourlyForecast: FC<HourlyForecastProps> = ({time_now, timezone, city, unit
                                           temp={data.main.temp} timezone={timezone}/>
                 else return
             }).filter((item: [] | undefined) => item !== undefined)
-            amount = filterData.length
             return filterData
         }
     }

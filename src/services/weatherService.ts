@@ -59,6 +59,12 @@ const formatCurrentWeather = (data: any) => {
     }
 }
 
+const getMonthForecast = async (searchParams: searchParam) => {
+    const MonthForecast = await getWeatherData(PARAMS.monthForecast, searchParams)
+    let {list} = MonthForecast
+    return list
+}
+
 const formatForecastWeather = (data: any) => {
     let {city, list} = data;
     let {timezone} = city;
@@ -99,5 +105,5 @@ const iconUrlFromCode = (code:string) => `http://openweathermap.org/img/wn/${cod
 
 export default getFormattedWeatherData;
 
-export {iconUrlFromCode, getCity, getFormattedHourlyWeatherData}
+export {iconUrlFromCode, getCity, getFormattedHourlyWeatherData, getMonthForecast}
 
