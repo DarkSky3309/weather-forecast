@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {iconUrlFromCode} from "./../../../services/weatherService"
+import {iconUrlFromCode} from "../../../services/weatherService"
 import {UNITS} from "../../../enum";
 
 interface currentWeatherProps {
@@ -23,7 +23,7 @@ const CurrentWeather: FC<currentWeatherProps> = ({
                                                  }) => {
     return (
 
-        <div className={"w-full text-center text-2xl"}>
+        <div className={"w-full text-center sm:text-2xl text-s"}>
             <div className="">{details}</div>
             <div className={"flex justify-around flex-row w-full items-center"}>
                 <img className={"w-1/5 text-right"} src={iconUrlFromCode(icon)} alt=""/>

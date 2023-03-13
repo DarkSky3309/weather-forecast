@@ -15,7 +15,8 @@ module.exports = {
       },
       spacing:{
         'header': '88px',
-        'current-weather': "363px"
+        'current-weather': "363px",
+        'mobile-current-weather': "315px"
       }
     },
   },
