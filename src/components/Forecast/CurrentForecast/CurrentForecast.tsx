@@ -65,7 +65,7 @@ const CurrentForecast: FC<currentForecastProps> = ({
         dataToLocalTime(timezone)
     }, [name])
     return (
-        <div className={"flex flex-col gap-3 items-center w-full"}>
+        <div className={"flex flex-col gap-3 items-center w-full h-current-weather"}>
             <LocationAndTime dt={dt} name={name} country={country}/>
             <CurrentWeather units={units} details={details} icon={icon} temp={temp}
                             humidity={humidity} feels_like={feels_like}

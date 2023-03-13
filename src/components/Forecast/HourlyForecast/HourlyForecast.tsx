@@ -63,7 +63,7 @@ const HourlyForecast: FC<HourlyForecastProps> = ({time_now, timezone, city, unit
     useEffect(() => {if (selectedDay === DateTime.now().setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).weekdayLong) setKey(Math.random)}, [selectedDay])
 
     return (
-        <motion.div key={key} className={"w-full mt-8 swiper overflow-hidden cursor-pointer"} ref={swiper}>
+        <motion.div key={key} className={"w-full mt-8 swiper overflow-hidden cursor-pointer h-36"} ref={swiper}>
             {isDataReceived && (
                 <motion.div drag={'x'} onDragEnd={(event, info) => {
                     console.log(info);}} dragConstraints={{right: 0, left: -calcWidth()}}

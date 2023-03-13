@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Navigation from "./Navigation";
 import {UNITS} from "../enum";
 import getFormattedWeatherData from "../services/weatherService";
@@ -6,12 +6,12 @@ import Forecast from "./Forecast/Forecast";
 import Loader from "./Loader";
 
 
-
 const WeatherForecast = () => {
     const [city, setCity] = useState('Dnepr');
     const [units, setUnits] = useState(UNITS.metric);
     const [data, setData]:any = useState();
     const [isDataReceived, setIsDataReceived] = useState(false);
+
     const fetchWeather = async () => {
         let data:any
         try {

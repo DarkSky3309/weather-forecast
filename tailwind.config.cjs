@@ -4,6 +4,7 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage:{
@@ -13,7 +14,8 @@ module.exports = {
         'deep-cold': '#4D7A98'
       },
       spacing:{
-        'header': '88px'
+        'header': '88px',
+        'current-weather': "363px"
       }
     },
   },
