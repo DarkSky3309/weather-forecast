@@ -3,11 +3,9 @@ import WeatherForecast from "./components/WeatherForecast";
 
 function App() {
     return (
-    <div className={"bg-gray-800"}>
-
-        <WeatherForecast/>
-
-    </div>
+            <div className={"bg-gray-800 "}>
+                <WeatherForecast/>
+            </div>
   )
 }
 

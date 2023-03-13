@@ -36,10 +36,10 @@ const CurrentForecast: FC<currentForecastProps> = ({
                                                        temp_min,
                                                        name,
                                                        country,
-                                                       temp
+                                                       temp,
                                                    }) => {
     const [dt, setDt] = useState(DateTime.now().setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toFormat("DDDD hh:mm:ss a"));
-    const [intervalState, setIntervalState]:[undefined | number, Dispatch<SetStateAction<number>> | Dispatch<SetStateAction<undefined>>] = useState(undefined);
+    const [intervalState, setIntervalState]: [undefined | number, Dispatch<SetStateAction<number>> | Dispatch<SetStateAction<undefined>>] = useState(undefined);
     const dataToLocalTime = (timezone: number) => {
         setDt(DateTime.now().setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).toFormat("DDDD hh:mm:ss a"))
     }
@@ -51,6 +51,7 @@ const CurrentForecast: FC<currentForecastProps> = ({
         }, 1000));
 
     }
+
 
     function stopInterval() {
         clearInterval(intervalState)

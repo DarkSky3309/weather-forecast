@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage:{
-        'cold': "url('/src/assets/bc-cold.png')"
+        'cold': "url('/src/assets/bc-cold.png')",
       },
       colors:{
         'deep-cold': '#4D7A98'

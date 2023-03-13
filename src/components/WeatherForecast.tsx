@@ -6,18 +6,20 @@ import Forecast from "./Forecast/Forecast";
 import Loader from "./Loader";
 
 
-const WeatherForecast = () => {
+const WeatherForecast: FC = () => {
     const [city, setCity] = useState('Dnepr');
     const [units, setUnits] = useState(UNITS.metric);
-    const [data, setData]:any = useState();
+    const [data, setData]: any = useState();
     const [isDataReceived, setIsDataReceived] = useState(false);
 
     const fetchWeather = async () => {
-        let data:any
+        setIsDataReceived(false)
+        let data: any
         try {
-            data = await getFormattedWeatherData( {q: city, units: units});
-        } catch (e) {console.error(e)}
-            finally {
+            data = await getFormattedWeatherData({q: city, units: units});
+        } catch (e) {
+            console.error(e)
+        } finally {
             setIsDataReceived(true)
         }
         setData(data)

@@ -35,11 +35,13 @@ const DailyForecast: FC<DailyForecastProps> = ({city, units, setSelectedDay, tim
 
     const renderDailyForecast = () => {
         if (isDataReceived) {
-            let dailyForecast = dataState.map((data: any, index: number) => {
-                return <DayItem active={selectedDay === DateTime.fromSeconds(data.dt).setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).weekdayLong && index < 5} timezone={timezone} key={index} dt={data.dt} icon={data.weather[0].icon} clickable={index < 5} temp={data.temp.day}
-                                units={units} setSelectedDay={setSelectedDay}/>
+            return dataState.map((data: any, index: number) => {
+                return <DayItem
+                    active={selectedDay === DateTime.fromSeconds(data.dt).setZone(`UTC${(timezone >= 0 ? "+" + timezone / 3600 : timezone / 3600)}`).weekdayLong && index < 5}
+                    timezone={timezone} key={index} dt={data.dt} icon={data.weather[0].icon} clickable={index < 5}
+                    temp={data.temp.day}
+                    units={units} setSelectedDay={setSelectedDay}/>
             })
-            return dailyForecast
         }
     }
 

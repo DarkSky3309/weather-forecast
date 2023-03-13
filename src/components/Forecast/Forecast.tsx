@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import CurrentForecast from "./CurrentForecast/CurrentForecast";
 import {UNITS} from "../../enum";
 import HourlyForecast from "./HourlyForecast/HourlyForecast";
@@ -13,9 +13,11 @@ interface forecastType {
 }
 
 
-const Forecast: FC<forecastType> = ({data, units, city}) => {
+const Forecast: FC<forecastType> = ({data, units, city }) => {
     const newFormat:DateTimeFormatOptions = {weekday: "long"}
     const [selectedDay, setSelectedDay] = useState(DateTime.now().setZone(`UTC${(data.timezone >= 0 ? "+" + data.timezone / 3600 : data.timezone / 3600)}`).toLocaleString(newFormat));
+
+
 
 
     return (
