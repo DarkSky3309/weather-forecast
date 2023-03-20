@@ -48,7 +48,7 @@ const DailyForecast: FC<DailyForecastProps> = ({city, units, setSelectedDay, tim
     const swiper = useRef() as React.MutableRefObject<HTMLDivElement>
 
     return (
-        <motion.div className={"w-full mt-8 swiper overflow-hidden cursor-pointer mb-10 h-44"} ref={swiper}>
+        <motion.div className={"w-full mt-8 swiper overflow-hidden cursor-pointer mb-10 h-48"} ref={swiper}>
             {isDataReceived && (
                 <motion.div drag={"x"} dragConstraints={{right: 0, left: -1400 + swiper.current.offsetWidth}}
                             className={"swiper-wrapper flex w-32"}>
