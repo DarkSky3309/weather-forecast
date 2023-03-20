@@ -67,7 +67,7 @@ const HourlyForecast: FC<HourlyForecastProps> = ({time_now, timezone, city, unit
             {isDataReceived && (
                 <motion.div drag={'x'} onDragEnd={(event, info) => {
                     console.log(info);}} dragConstraints={{right: 0, left: -calcWidth()}}
-                            className={"swiper-wrapper flex w-32"}
+                            className={"swiper-wrapper flex gap-2 w-32"}
                             ref={inner}>
                     {renderHourlyForecast(selectedDay)}
                 </motion.div>)}
